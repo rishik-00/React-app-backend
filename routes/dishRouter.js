@@ -46,7 +46,6 @@ dishRouter.route('/:dishId')
 .get((req, res) => {
 	Dishes.findById(req.params.dishId)
     .then((dish) => {
-        console.log('Dish Created', dish);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/josn');
         res.json(dish);
@@ -62,7 +61,6 @@ dishRouter.route('/:dishId')
         $set: req.body
     }, { new: true})
     .then((dish) => {
-        console.log('Dish Created', dish);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/josn');
         res.json(dish);
