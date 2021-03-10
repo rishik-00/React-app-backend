@@ -70,7 +70,7 @@ favouriteRouter.route('/')
                 })
                     .catch((err) => next(err));
                 
-            });
+            })
             .catch((err) => next(err));
 })
 
@@ -129,7 +129,7 @@ favouriteRouter.route('/:dishId')
 
   }, (err) => next(err))
   .catch((err) => next(err));
-});
+})
 .post(cors.corsWithOptions, authenticate.verifyUser, 
     (req, res, next) => {
         Favourites.find({})
@@ -156,19 +156,19 @@ favouriteRouter.route('/:dishId')
                             res.statusCode = 201;
                             res.setHeader("Content-Type", "application/json");
                             res.json(user);
-                            console.log("Favourites Created");
-                        
-                    }, (err) => next(err))
-                    .catch((err) => next(err));
+                            console.log("Favourites Created");                        
+                                }, (err) => next(err))                  
 
-            })
-            .catch((err) => next(err));
+                        }).catch((err) => next(err));
+                            
+            }) .catch((err) => next(err));
 })
 
 .put(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     res.statusCode = 403;
     res.end('PUT operation is not supported on /favourites/:dishId');
 })
+
 .delete(cors.corsWithOptions, authenticate.verifyUser, (req, res, next) => {
     Favourites.find({})
         .populate('user')
@@ -189,15 +189,22 @@ favouriteRouter.route('/:dishId')
                             res.setHeader("Content-Type", "application/json");
                             res.json(user);
                             console.log("Favourites Created");
-                    }, (err) => next(err));
-                
-            } else {
+                            }, 
+                            (err) => next(err))
+                            
+                        }).catch((err) => next(err));
+                }
+            else {
                 var err = new Error('You do not have any favourites');
                 err.status = 404;
                 return next(err);
-            }
-        }, (err) => next(err))
-        .catch((err) => next(err));
+                 }
+                
+            }) .catch((err) => next(err));
 });
+
+
+
+
 
 module.exports = favouriteRouter;
